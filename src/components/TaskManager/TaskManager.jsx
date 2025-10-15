@@ -33,7 +33,6 @@ export const TaskManager = () => {
       <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
       <Filter filterTasks={filterTasks} />
 
-      <h3>{task.length} tâches restantes</h3>
       <TaskList
         tasks={task}
         setTask={setTask}
