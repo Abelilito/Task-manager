@@ -1,35 +1,45 @@
 import { Field } from "formik";
-import s from "./style.module.css";
+import ChevronDown from "../ChevronDown";
 
 export const FormFields = ({ formik }) => {
   return (
-    <div className={s.container}>
-      <label className={s.labelContainer}>
-        <span>Nom de la tâche</span>
-        <Field
-          type="text"
-          name="title"
-          value={formik.values.title}
-          onChange={formik.handleChange}
-          required
-        />
-      </label>
+    <>
+      <Field
+        type="text"
+        name="title"
+        className="
+          w-full md:w-[43%] lg:w-[28%] border-[#737373] border border-solid p-[1rem] bg-transparent rounded-md text-[0.8rem] 
+          focus:border-[#D8D0BF] focus-visible:outline-none placeholder:text-[#8D8D8D]
+        "
+        placeholder="Nom de la tâche"
+        value={formik.values.title}
+        onChange={formik.handleChange}
+        required
+      />
 
-      <label className={s.labelContainer}>
-        <span>Priorité</span>
-        <Field
-          as="select"
-          name="priority"
-          value={formik.values.priority}
-          onChange={formik.handleChange}
-          required
-        >
-          <option value=""></option>
-          <option value="Basse">Basse</option>
-          <option value="Moyenne">Moyenne</option>
-          <option value="Haute">Haute</option>
-        </Field>
-      </label>
-    </div>
+      <div className="relative inline-block w-full md:w-[43%] lg:w-[28%]">
+        <div className="relative inline-block w-full">
+          <select
+            name="priority"
+            className="
+              appearance-none w-full border-[#737373] border border-solid p-[1rem] bg-transparent rounded-md text-[0.8rem] 
+            focus:border-[#D8D0BF] focus-visible:outline-none invalid:text-[#8D8D8D]
+            "
+            value={formik.values.priority}
+            onChange={formik.handleChange}
+            required
+          >
+            <option value="">Priorité de la tâche</option>
+            <option value="Basse">Basse</option>
+            <option value="Moyenne">Moyenne</option>
+            <option value="Haute">Haute</option>
+          </select>
+
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 w-[43px]">
+            <ChevronDown />
+          </div>
+        </div>
+      </div>
+    </>
   );
 };

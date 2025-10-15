@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { TaskForm } from "../TaskForm/TaskForm";
 import { TaskList } from "../TaskList/TaskList";
-import { Filter } from "../Filter/Filter";
 
 export const TaskManager = () => {
   const [task, setTask] = useState([]);
@@ -16,11 +15,15 @@ export const TaskManager = () => {
     switch (filterType) {
       case "done":
         taskList = task.filter((item) => item.done);
-        setFiltered(taskList);
+        if (taskList.length > 0) {
+          setFiltered(taskList);
+        }
         break;
       case "inProgress":
         taskList = task.filter((item) => !item.done);
-        setFiltered(taskList);
+        if (taskList.length > 0) {
+          setFiltered(taskList);
+        }
         break;
       default:
         setFiltered(task);
@@ -29,9 +32,10 @@ export const TaskManager = () => {
   }
 
   return (
-    <>
-      <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
-      <Filter filterTasks={filterTasks} />
+    <div className="flex flex-col items-center w-full">
+      <div className="top-0 sticky bg-[#f9f9f9] w-full pt-[2rem]">
+        <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
+      </div>
 
       <TaskList
         tasks={task}
@@ -39,6 +43,6 @@ export const TaskManager = () => {
         filtered={filtered}
         filterTask={filterTasks}
       />
-    </>
+    </div>
   );
 };

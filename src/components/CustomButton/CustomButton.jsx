@@ -1,11 +1,13 @@
-export const CustomButton = ({ formik, text, color, fn, id }) => {
+export const CustomButton = ({ formik, text, classes, fn, id }) => {
   if (formik) {
     return (
       <>
         <button
           type="submit"
           disabled={!formik.isValid || !formik.dirty}
-          className={color}
+          className={
+            classes + " p-[15px] text-[1rem] rounded-md font-medium font-sans"
+          }
         >
           {text}
         </button>
@@ -14,7 +16,10 @@ export const CustomButton = ({ formik, text, color, fn, id }) => {
   } else {
     return (
       <>
-        <button className={color} onClick={fn}>
+        <button
+          className={classes + " px-[15px] rounded-md font-medium font-sans"}
+          onClick={fn}
+        >
           {text}
         </button>
       </>

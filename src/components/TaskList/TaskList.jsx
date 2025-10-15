@@ -1,20 +1,14 @@
+import { Checkboxe } from "../Checkboxe/Checkboxe";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { Filter } from "../Filter/Filter";
 
 export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
   function filteredCount() {
     if (filtered.length === 0 || filtered.length === 1) {
-      return <h3>{filtered.length} tâche</h3>;
+      return <h3 className="font-bold">{filtered.length} tâche</h3>;
     } else {
-      return <h3>{filtered.length} tâches</h3>;
+      return <h3 className="font-bold">{filtered.length} tâches</h3>;
     }
-  }
-
-  function handleChangeStatus(e, task) {
-    const updatedTask = tasks.map((item) =>
-      item.id === task.id ? { ...item, done: !item.done } : item
-    );
-    setTask(updatedTask);
-    filterTask();
   }
 
   function handleDeleteTask(item) {
@@ -23,42 +17,63 @@ export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
     setTask([...filtered]);
   }
 
-  return (
-    <>
-      {filteredCount()}
-      <div className="container-list">
-        {filtered.map((task, index) => (
-          <div key={index}>
-            <div className="flex gap-8 mb-8 task-wrapper">
-              <div className="flex flex-col">
-                <div>Tâche : {task.title}</div>
-                <div>Priorité : {task.priority}</div>
-                <div>
-                  <input
-                    id={"checkbox-" + task.id}
-                    type="checkbox"
-                    name="completed"
-                    defaultChecked={task.done}
-                    onChange={(e) => handleChangeStatus(e, task)}
-                  />
-                  <label htmlFor={"checkbox-" + task.id}>
-                    Cochez si la tâche est terminée
-                  </label>
-                </div>
-              </div>
-              <span className={task.done ? "green-10 tag" : "yellow-5 tag"}>
-                Terminée
-              </span>
-            </div>
+  function status(item) {
+    if (item.done) {
+      return (
+        <span className="bg-[#5BB98B] px-[15px] py-[5px] rounded-md text-[13px]">
+          Terminée
+        </span>
+      );
+    } else {
+      return (
+        <span className="bg-[#D5AE39] px-[15px] py-[5px] rounded-md text-[13px]">
+          En cours
+        </span>
+      );
+    }
+  }
 
-            <CustomButton
-              text="Supprimé"
-              color="red-11"
-              fn={() => handleDeleteTask(task)}
-            />
-          </div>
-        ))}
-      </div>
-    </>
-  );
+  if (filtered.length > 0) {
+    return (
+      <>
+        <div className="top-[14rem] sticky bg-[#f9f9f9] w-full flex flex-col items-center">
+          <Filter filterTasks={filterTask} />
+          <div className="my-8">{filteredCount()}</div>
+        </div>
+
+        <div className="w-full grid justify-center gap-4 grid-cols-[repeat(auto-fit,_100%)] md:grid-cols-[repeat(auto-fit,_24rem)]">
+          {filtered.map((task, index) => (
+            <div
+              key={index}
+              className="border border-solid border-[#737373] p-4 rounded-md"
+            >
+              <div className="flex gap-8 mb-8 items-start justify-between">
+                <div className="flex flex-col">
+                  <div className="text-xl font-bold mb-4">{task.title}</div>
+                  <div className="text-[14px]">
+                    Priorité :{" "}
+                    <span className="font-bold">{task.priority}</span>
+                  </div>
+                  <Checkboxe
+                    text="Cochez si la tâche est terminée"
+                    tasks={tasks}
+                    item={task}
+                    setTask={setTask}
+                    filterTask={filterTask}
+                  />
+                </div>
+                {status(task)}
+              </div>
+
+              <CustomButton
+                text="Supprimé"
+                classes="bg-[#E5484D] text-white py-[10px] text-[14px]"
+                fn={() => handleDeleteTask(task)}
+              />
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
 };
