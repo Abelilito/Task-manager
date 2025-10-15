@@ -1,6 +1,5 @@
 import { Form, Formik, useFormik } from "formik";
 import { FormFields } from "../FormFields/FormFields";
-import s from "./style.module.css";
 import { CustomButton } from "../CustomButton/CustomButton";
 
 export const TaskForm = ({ task, setTask, filterTasks }) => {
@@ -31,12 +30,15 @@ export const TaskForm = ({ task, setTask, filterTasks }) => {
   return (
     <>
       <Formik>
-        <Form onSubmit={formik.handleSubmit}>
-          <div className={s.mb8}>
+        <Form onSubmit={formik.handleSubmit} className="w-full">
+          <div className="w-full text-center flex flex-col items-center gap-4">
             <FormFields formik={formik} />
+            <CustomButton
+              formik={formik}
+              text={"Ajouter"}
+              classes="bg-[#6d28d9] border-[#6d28d9] text-white w-full md:w-[43%] lg:w-[28%]"
+            />
           </div>
-
-          <CustomButton formik={formik} text={"Ajouter"} color={"btn-submit"} />
         </Form>
       </Formik>
     </>
