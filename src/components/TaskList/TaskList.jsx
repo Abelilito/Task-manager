@@ -20,13 +20,13 @@ export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
   function status(item) {
     if (item.done) {
       return (
-        <span className="bg-[#5BB98B] px-[15px] py-[5px] rounded-md">
+        <span className="bg-[#5BB98B] px-[15px] py-[5px] rounded-md text-[13px]">
           Terminée
         </span>
       );
     } else {
       return (
-        <span className="bg-[#D5AE39] px-[15px] py-[5px] rounded-md">
+        <span className="bg-[#D5AE39] px-[15px] py-[5px] rounded-md text-[13px]">
           En cours
         </span>
       );
@@ -36,9 +36,10 @@ export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
   if (filtered.length > 0) {
     return (
       <>
-        <Filter filterTasks={filterTask} />
-
-        <div className="my-8">{filteredCount()}</div>
+        <div className="top-[14rem] sticky bg-[#f9f9f9] w-full mb-8 flex flex-col items-center">
+          <Filter filterTasks={filterTask} />
+          <div className="mt-8">{filteredCount()}</div>
+        </div>
 
         <div className="w-full grid justify-center gap-4 grid-cols-[repeat(auto-fit,_100%)] md:grid-cols-[repeat(auto-fit,_24rem)]">
           {filtered.map((task, index) => (

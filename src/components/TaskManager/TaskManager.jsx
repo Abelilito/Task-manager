@@ -29,7 +29,10 @@ export const TaskManager = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
+      <div className="top-0 sticky bg-[#f9f9f9] w-full pt-[2rem]">
+        <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
+      </div>
+
       <TaskList
         tasks={task}
         setTask={setTask}
