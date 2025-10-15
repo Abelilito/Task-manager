@@ -1,0 +1,13 @@
+.labelContainer,
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelContainer {
+  gap: 5px;
+}
+
+.container {
+  gap: 1rem;
+}
