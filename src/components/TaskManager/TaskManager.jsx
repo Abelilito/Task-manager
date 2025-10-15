@@ -21,7 +21,9 @@ export const TaskManager = () => {
         break;
       case "inProgress":
         taskList = task.filter((item) => !item.done);
-        setFiltered(taskList);
+        if (taskList.length > 0) {
+          setFiltered(taskList);
+        }
         break;
       default:
         setFiltered(task);
