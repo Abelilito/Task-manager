@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TaskForm } from "../TaskForm/TaskForm";
 import { TaskList } from "../TaskList/TaskList";
 import { Filter } from "../Filter/Filter";
@@ -6,6 +6,10 @@ import { Filter } from "../Filter/Filter";
 export const TaskManager = () => {
   const [task, setTask] = useState([]);
   const [filtered, setFiltered] = useState([]);
+
+  useEffect(() => {
+    setFiltered(task);
+  }, [task]);
 
   function filterTasks(filterType) {
     let taskList;
@@ -29,7 +33,6 @@ export const TaskManager = () => {
       <TaskForm task={task} setTask={setTask} filterTasks={filterTasks} />
       <Filter filterTasks={filterTasks} />
 
-      <h3>{task.length} tâches restantes</h3>
       <TaskList
         tasks={task}
         setTask={setTask}
