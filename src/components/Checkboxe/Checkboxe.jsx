@@ -15,7 +15,7 @@ export const Checkboxe = ({ text, tasks, item, setTask, filterTask }) => {
           type="checkbox"
           name="completed"
           className="checked:accent-[#6d28d9]"
-          defaultChecked={item.done}
+          checked={item.done}
           onChange={(e) => handleChangeStatus(e, item)}
         />
         <label htmlFor={"checkbox-" + item.id} className="text-[14px]">

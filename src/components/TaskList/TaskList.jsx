@@ -36,9 +36,9 @@ export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
   if (filtered.length > 0) {
     return (
       <>
-        <div className="top-[14rem] sticky bg-[#f9f9f9] w-full mb-8 flex flex-col items-center">
+        <div className="top-[14rem] sticky bg-[#f9f9f9] w-full flex flex-col items-center">
           <Filter filterTasks={filterTask} />
-          <div className="mt-8">{filteredCount()}</div>
+          <div className="my-8">{filteredCount()}</div>
         </div>
 
         <div className="w-full grid justify-center gap-4 grid-cols-[repeat(auto-fit,_100%)] md:grid-cols-[repeat(auto-fit,_24rem)]">
@@ -67,7 +67,7 @@ export const TaskList = ({ tasks, setTask, filtered, filterTask }) => {
 
               <CustomButton
                 text="Supprimé"
-                classes="bg-[#E5484D] text-white py-[10px]"
+                classes="bg-[#E5484D] text-white py-[10px] text-[14px]"
                 fn={() => handleDeleteTask(task)}
               />
             </div>
